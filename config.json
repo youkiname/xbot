@@ -1,0 +1,19 @@
+{
+    "delay_after_click_discard": 0.5,
+    "delay_after_click_load": 0.2,
+    "delay_after_input_rate": 0.2,
+    "delay_after_reload": 1,
+    "delay_before_bot_run": 1,
+    "delay_before_click_discard": 0.5,
+    "delay_before_reload": 3.0,
+    "discard_position": [
+        1423,
+        280
+    ],
+    "load_position": [
+        1551,
+        278
+    ],
+    "rate": "100",
+    "stop_hotkey": "<shift>"
+}
