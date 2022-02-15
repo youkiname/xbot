@@ -1,18 +1,16 @@
 {
-    "delay_after_click_discard": 0.5,
-    "delay_after_click_load": 0.2,
-    "delay_after_input_rate": 0.2,
-    "delay_after_reload": 1,
-    "delay_before_bot_run": 1,
-    "delay_before_click_discard": 0.5,
-    "delay_before_reload": 3.0,
+    "change_discard_position_hotkey": "-",
+    "change_load_position_hotkey": "=",
+    "default_delay": 0.2,
+    "delay_after_reload": 7.0,
+    "delay_before_reload": 2.0,
     "discard_position": [
-        1423,
-        280
+        1442,
+        278
     ],
     "load_position": [
-        1551,
-        278
+        1563,
+        275
     ],
     "rate": "100",
     "stop_hotkey": "<shift>"

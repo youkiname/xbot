@@ -28,24 +28,23 @@ class Bot(Thread):
 
     def reload_page(self):
         self.switch_tab()
-        self.stoppable_sleep(config.delay_before_click_discard)
+        self.stoppable_sleep(config.delay_before_reload)
         self.mouse.position = config.discard_position
         self.mouse.click(Button.left, 1)
-        self.stoppable_sleep(config.delay_after_click_discard)
+        self.stoppable_sleep(config.default_delay)
         self.mouse.position = config.load_position
         self.mouse.click(Button.left, 1)
-        self.stoppable_sleep(config.delay_after_click_load)
+        self.stoppable_sleep(config.default_delay)
         self.switch_tab()
 
     def run(self):
-        sleep(config.delay_before_bot_run)
         while not self.stopped:
             try:
                 self.enter_rate()
-                self.stoppable_sleep(config.delay_after_input_rate)
+                self.stoppable_sleep(config.default_delay)
                 self.keyboard.press(Key.enter)
                 self.keyboard.release(Key.enter)
-                self.stoppable_sleep(config.delay_before_reload)
+                self.stoppable_sleep(config.default_delay)
                 self.reload_page()
                 self.stoppable_sleep(config.delay_after_reload)
             except UserInterrupt:
@@ -55,6 +54,9 @@ class Bot(Thread):
         self.stopped = True
 
     def stoppable_sleep(self, sec):
-        sleep(sec)
-        if self.stopped:
-            raise UserInterrupt()
+        while sec > 0:
+            sleep(min(sec, 0.5))
+            sec -= 0.5
+            if self.stopped:
+                raise UserInterrupt()
+

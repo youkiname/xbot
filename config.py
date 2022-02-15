@@ -3,17 +3,15 @@ import json
 
 class Config:
     def __init__(self):
-        self.delay_before_bot_run = 1
-        self.delay_after_input_rate = 0.2
-        self.delay_before_reload = 3
         self.delay_after_reload = 7
-        self.delay_before_click_discard = 0.5
-        self.delay_after_click_discard = 0.5
-        self.delay_after_click_load = 0.2
-        self.stop_hotkey = "<ctrl>"
+        self.delay_before_reload = 0.5
+        self.default_delay = 0.2
+        self.stop_hotkey = "<shift>"
         self.rate = "100"
         self.discard_position = (1424, 276)
         self.load_position = (1424, 276)
+        self.change_discard_position_hotkey = "-"
+        self.change_load_position_hotkey = "="
 
     def save_json(self):
         json_string = json.dumps(self.__dict__, indent=4, sort_keys=True)
