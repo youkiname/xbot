@@ -10,6 +10,8 @@ class Config:
         self.rate = "100"
         self.discard_position = (1424, 276)
         self.load_position = (1424, 276)
+        self.freeze_position = (1424, 276)
+        self.change_freeze_position_hotkey = "\\"
         self.change_discard_position_hotkey = "-"
         self.change_load_position_hotkey = "="
 

@@ -24,6 +24,8 @@ class Gui:
         self.row += 1
         self.create_delay_after_reload_entry()
         self.row += 1
+        self.create_freeze_position_entry()
+        self.row += 1
         self.create_discard_position_entry()
         self.row += 1
         self.create_load_position_entry()
@@ -42,6 +44,7 @@ class Gui:
         self.bot = None
         self.hotkey_listener = GlobalHotKeys({
             config.stop_hotkey: self.on_stop_hotkey,
+            config.change_freeze_position_hotkey: self.on_change_freeze_position_hotkey,
             config.change_discard_position_hotkey: self.on_change_discard_position_hotkey,
             config.change_load_position_hotkey: self.on_change_load_position_hotkey
         })
@@ -65,6 +68,12 @@ class Gui:
         self.delay_after_reload = Entry(self.window, width=20)
         self.delay_after_reload.insert(0, str(config.delay_after_reload))
         self.delay_after_reload.grid(row=self.row, column=1)
+
+    def create_freeze_position_entry(self):
+        Label(self.window, text="Freeze координаты").grid(row=self.row, column=0)
+        self.freeze_position = Entry(self.window, width=20)
+        self.freeze_position.insert(0, f"{config.discard_position[0]},{config.discard_position[1]}")
+        self.freeze_position.grid(row=self.row, column=1)
 
     def create_discard_position_entry(self):
         Label(self.window, text="Discard координаты").grid(row=self.row, column=0)
@@ -114,6 +123,7 @@ class Gui:
             config.rate = self.rate_entry.get()
             config.delay_before_reload = float(self.delay_before_reload.get())
             config.delay_after_reload = float(self.delay_after_reload.get())
+            config.freeze_position = tuple(map(int, self.freeze_position.get().split(",")))
             config.discard_position = tuple(map(int, self.discard_position.get().split(",")))
             config.load_position = tuple(map(int, self.load_position.get().split(",")))
             config.stop_hotkey = self.hotkey_text.get()
@@ -137,6 +147,13 @@ class Gui:
             self.bot = None
             self.status_label.config(text="Выключен")
             print("Bot stopped")
+
+    def on_change_freeze_position_hotkey(self):
+        print("on_change_freeze_position_hotkey")
+        pos = self.mouse_controller.position
+        self.freeze_position.delete(0, "end")
+        self.freeze_position.insert(0, f"{pos[0]},{pos[1]}")
+        self.update_config()
 
     def on_change_discard_position_hotkey(self):
         print("on_change_discard_position_hotkey")

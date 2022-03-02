@@ -28,6 +28,8 @@ class Bot(Thread):
 
     def reload_page(self):
         self.switch_tab()
+        self.mouse.position = config.freeze_position
+        self.mouse.click(Button.left, 1)
         self.stoppable_sleep(config.delay_before_reload)
         self.mouse.position = config.discard_position
         self.mouse.click(Button.left, 1)
@@ -52,6 +54,7 @@ class Bot(Thread):
 
     def stop(self):
         self.stopped = True
+        self.switch_tab()
 
     def stoppable_sleep(self, sec):
         while sec > 0:
