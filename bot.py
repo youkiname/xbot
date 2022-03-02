@@ -28,6 +28,7 @@ class Bot(Thread):
 
     def reload_page(self):
         self.switch_tab()
+        self.stoppable_sleep(config.default_delay)
         self.mouse.position = config.freeze_position
         self.mouse.click(Button.left, 1)
         self.stoppable_sleep(config.delay_before_reload)
@@ -62,4 +63,3 @@ class Bot(Thread):
             sec -= 0.5
             if self.stopped:
                 raise UserInterrupt()
-
